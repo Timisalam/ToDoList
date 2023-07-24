@@ -25,5 +25,5 @@ input[type=text]:focus {
     display: none !important;
 }
 .complete{
-    background: rgb(7, 241, 7) !important;
+    background: rgba(255, 215, 0, 0.5) !important;
 }
