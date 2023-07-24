@@ -21,6 +21,14 @@ const removeTask = e => {
     }
 }
 
+completedTask = e => {
+    if (e.target.tagName === 'I') {
+        e.target.parentElement.classList.add('complete');
+        setTimeout(function () {
+            e.target.parentElement.remove();
+        }, 1000);
+    }
+}
 
 addToList = (text) => {
     //function to add new todo to the list 
@@ -67,7 +75,6 @@ if (localStorage.length) {
     stored.forEach(task => {
         addToList(task.data);
     })
-
 }
 
 

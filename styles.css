@@ -24,3 +24,6 @@ input[type=text]:focus {
 .success{
     display: none !important;
 }
+.complete{
+    background: rgb(7, 241, 7) !important;
+}
