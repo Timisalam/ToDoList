@@ -8,7 +8,10 @@ let todos = [];
 const removeTask = e => {
     //function to remove task from todo list
     if (e.target.tagName === 'I') {
-        completedTask();
+        e.target.parentElement.classList.add('complete');
+        setTimeout(function () {
+            e.target.parentElement.remove();
+        }, 1000);
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
         console.log(e.target.parentElement.textContent);
@@ -20,14 +23,7 @@ const removeTask = e => {
     }
 }
 
-completedTask = e => {
-    if (e.target.tagName === 'I') {
-        e.target.parentElement.classList.add('complete');
-        setTimeout(function () {
-            e.target.parentElement.remove();
-        }, 1000);
-    }
-}
+
 
 addToList = (text) => {
     //function to add new todo to the list 
@@ -91,7 +87,7 @@ addForm.addEventListener('submit', e => {
     if (todo.length) {
         addToList(todo);
     }
-    
+
     addForm.reset();
 })
 
