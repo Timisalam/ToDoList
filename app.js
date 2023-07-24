@@ -67,16 +67,15 @@ SearchToDo = () => {
 }
 
 
-if (localStorage.length) {
-    //if local storage is not empty add whats in local storage to html
+if (localStorage.getItem("todos")) {
     let stored = localStorage.getItem("todos");
-
     stored = JSON.parse(stored);
-    stored.forEach(task => {
-        addToList(task.data);
-    })
+    if (Array.isArray(stored)) {
+        stored.forEach(task => {
+            addToList(task.data);
+        });
+    }
 }
-
 
 search.addEventListener('keyup', e => {
     SearchToDo();
