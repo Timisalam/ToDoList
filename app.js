@@ -9,7 +9,6 @@ const removeTask = e => {
     //function to remove task from todo list
     if (e.target.tagName === 'I') {
         completedTask();
-        e.target.parentElement.remove();
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
         console.log(e.target.parentElement.textContent);
