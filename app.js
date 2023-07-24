@@ -8,6 +8,7 @@ let todos = [];
 const removeTask = e => {
     //function to remove task from todo list
     if (e.target.tagName === 'I') {
+        completedTask();
         e.target.parentElement.remove();
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
@@ -16,7 +17,6 @@ const removeTask = e => {
             return !(task.data.trim() === e.target.parentElement.textContent.trim());
         });
         //creating an array of local storage filtering that array based on the task you choose to delete then overwriting local storage
-        console.log(tasks)
         localStorage.setItem(`todos`, JSON.stringify(tasks));
     }
 }
@@ -68,9 +68,11 @@ SearchToDo = () => {
 
 
 if (localStorage.getItem("todos")) {
+    //checks if todos key exists
     let stored = localStorage.getItem("todos");
     stored = JSON.parse(stored);
     if (Array.isArray(stored)) {
+        //checks if array is not empty
         stored.forEach(task => {
             addToList(task.data);
         });
