@@ -78,6 +78,10 @@ search.addEventListener('keyup', e => {
     SearchToDo();
 })
 
+search.addEventListener('input', e => {
+    SearchToDo();
+});
+
 
 
 
