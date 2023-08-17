@@ -1,43 +1,66 @@
 const addForm = document.querySelector('.add');
 const list = document.querySelector('ul');
-const trash = document.querySelector('.far')
+const star = document.querySelector('.bi.bi-star.yellow-color')
 const search = document.querySelector('.search');
 const toDos = document.querySelectorAll('LI');
+const button = document.querySelector(".fav");
+const clear = document.querySelector(".clear");
+
 let todos = [];
+let favourites = [];
 
 const removeTask = e => {
     //function to remove task from todo list
-    if (e.target.tagName === 'I') {
+    if (e.target.classList.contains("delete")) {
         e.target.parentElement.classList.add('complete');
         setTimeout(function () {
             e.target.parentElement.remove();
         }, 1000);
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
-        console.log(e.target.parentElement.textContent);
         tasks = tasks.filter((task) => {
-            return !(task.data.trim() === e.target.parentElement.textContent.trim());
+            return !(task.data === e.target.parentElement.textContent.trim());
         });
         //creating an array of local storage filtering that array based on the task you choose to delete then overwriting local storage
         localStorage.setItem(`todos`, JSON.stringify(tasks));
     }
 }
 
+const favouriteTask = e => {
+    if (e.target.classList.contains("star")) {
+        e.target.parentElement.classList.add('added');
+        setTimeout(function () {
+            e.target.parentElement.classList.remove('added');
+        }, 1000);
+        favourites.push({ data: e.target.parentElement.textContent.trim() });
+    //adding todo to an array of objects 
+    localStorage.setItem(`favourites`, JSON.stringify(favourites));
+    //turning array of objects into json
+    }
+    console.log(favourites.length);
+    
+}
+removeAll = () =>{
+    list.innerHTML = "";
+    localStorage.clear();
+}
+
 
 
 addToList = (text) => {
     //function to add new todo to the list 
-    html = `<li class="list-group-item d-flex justify-content-between align-items-center">
+    html = `<li class="list-group-item d-flex  align-items-center">
     <span>${text}</span>
+        <i class="bi bi-star yellow-color star"></i>
     <i class="far fa-trash-alt delete"></i>
 </li>`
     todos.push({ data: text });
     //adding todo to an array of objects 
     list.innerHTML += html;
-    console.log(todos);
     localStorage.setItem(`todos`, JSON.stringify(todos));
     //turning array of objects into json
 }
+
 
 
 SearchToDo = () => {
@@ -59,6 +82,24 @@ SearchToDo = () => {
         }
         count++;
     })
+}
+
+addFavourites = () =>{
+    
+    if (localStorage.getItem("favourites")) {
+        //checks if todos key exists
+        let stored = localStorage.getItem("favourites");
+        stored = JSON.parse(stored);
+        if (Array.isArray(stored)) {
+            //checks if array is not empty
+            stored.forEach(task => {
+                addToList(task.data);
+            });
+        }
+    }
+
+    favourites = []; // Clear favorites after adding them
+
 }
 
 
@@ -85,6 +126,8 @@ search.addEventListener('input', e => {
 
 
 
+
+
 addForm.addEventListener('submit', e => {
     e.preventDefault();
     const todo = addForm.add.value.trim();
@@ -95,7 +138,19 @@ addForm.addEventListener('submit', e => {
     addForm.reset();
 })
 
+button.addEventListener("click",e =>{
+addFavourites();
+})
 
 list.addEventListener('click', e => {
-    removeTask(e);
+    if (e.target.classList.contains("delete")) {
+        removeTask(e);
+    }
+    if (e.target.classList.contains("star")) {
+        favouriteTask(e);
+    }
+})
+
+clear.addEventListener("click",e=> {
+removeAll();
 })

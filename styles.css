@@ -14,6 +14,20 @@ input[type=text]:focus {
     max-width: 400px;
 }
 
+.list-group-item span {
+    margin-right: auto;
+}
+
+.list-group-item i {
+    margin-right: 15px;
+    /* Adjust this value to control the spacing */
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .todos li {
     background: #423a6f;
 }
@@ -21,9 +35,23 @@ input[type=text]:focus {
 .delete {
     cursor: pointer;
 }
-.success{
+.fav{
+    background: rgba(255, 215, 0, 0.5);
+    color: white;
+}
+.clear{
+    background: red;
+    color: white;
+}
+
+.success {
     display: none !important;
 }
-.complete{
+
+.complete {
+    background: green !important;
+}
+
+.added {
     background: rgba(255, 215, 0, 0.5) !important;
 }
