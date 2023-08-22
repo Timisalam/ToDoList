@@ -8,7 +8,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles.css">
     <title>Todo List</title>
 </head>
@@ -23,17 +23,22 @@
                 <input class="form-control m-auto" type="text" name="search" placeholder="search todos" />
             </form>
         </header>
-
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <p>Cannot add duplicate to list.</p>
+                <button id="closePopup">Close</button>
+            </div>
+        </div>
         <ul class="list-group todos mx-auto text-light">
-            
+
         </ul>
         <form class="add text-center my-4">
             <label class="text-light">Add a new todo...</label>
             <input class="form-control m-auto" type="text" name="add" />
         </form>
         <div class="buttons">
-        <button class="fav">Favourites</button>
-        <button class="clear">Clear List</button>
+            <button class="fav">Favourites</button>
+            <button class="clear">Clear List</button>
         </div>
 
     </div>
