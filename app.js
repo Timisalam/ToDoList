@@ -55,7 +55,7 @@ checkForDuplicates = (value) => {
         if (Array.isArray(stored)) {
             for (let i = 0; i < stored.length; i++) {
                 console.log(stored[i]);
-                if (stored[i].data === value) {
+                if (stored[i].data.trim() === value) {
                     added = true;
                 }
             }
