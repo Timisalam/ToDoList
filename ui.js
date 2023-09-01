@@ -27,6 +27,20 @@ const favouriteTask = e => {
     }
 
 }
+unfavourite = (e) =>{
+    e.target.parentElement.classList.add('removed');
+    setTimeout(function () {
+        e.target.parentElement.classList.remove('removed');
+    }, 1000);
+    let tasks = localStorage.getItem("favourites");
+    tasks = JSON.parse(tasks);
+    tasks = tasks.filter((task) => {
+        return !(task.data.trim() === e.target.parentElement.textContent.trim());
+    });
+    //creating an array of local storage filtering that array based on the task you choose to delete then overwriting local storage
+    localStorage.setItem(`favourites`, JSON.stringify(tasks));
+}
+
 removeAll = () => {
     list.textContent = "";
     localStorage.clear();

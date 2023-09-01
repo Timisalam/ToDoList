@@ -58,6 +58,9 @@ input[type=text]:focus {
     background: rgba(255, 215, 0, 0.5) !important;
 }
 
+.removed{
+    background: red !important;
+}
 /* styles.css */
 .popup {
     display: none;

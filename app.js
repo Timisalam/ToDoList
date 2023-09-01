@@ -15,10 +15,10 @@ let storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
 let favourites = storedFavourites;
 
 
-checkForDuplicates = (value) => {
+isDuplicate = (value, key) => {
     let added = false;
-    if (localStorage.getItem("todos")) {
-        let stored = localStorage.getItem("todos");
+    if (localStorage.getItem(key)) {
+        let stored = localStorage.getItem(key);
         stored = JSON.parse(stored);
         if (Array.isArray(stored)) {
             for (let i = 0; i < stored.length; i++) {
@@ -46,14 +46,13 @@ search.addEventListener('input', e => {
 addForm.addEventListener('submit', e => {
     e.preventDefault();
     const todo = addForm.add.value.trim();
-    if (!checkForDuplicates(todo)) {
+    if (!isDuplicate(todo, "todos")) {
         if (todo.length) {
             addToList(todo.toLowerCase());
         }
     }
     else {
-        popup.style.display = "flex";
-        list.style.display = "none";
+        
     }
 
     addForm.reset();
@@ -68,7 +67,12 @@ list.addEventListener('click', e => {
         removeTask(e);
     }
     if (e.target.classList.contains("star")) {
-        favouriteTask(e);
+        if (!isDuplicate(e.target.parentElement.textContent.trim(), "favourites")) {
+            favouriteTask(e);
+        }
+        else {
+            unfavourite(e);
+        }
     }
 })
 
