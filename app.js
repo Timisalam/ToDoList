@@ -1,12 +1,12 @@
 const addForm = document.querySelector('.add');
 const list = document.querySelector('ul');
-const star = document.querySelector('.bi.bi-star.yellow-color')
 const search = document.querySelector('.search');
 const toDos = document.querySelectorAll('LI');
 const button = document.querySelector(".fav");
 const clear = document.querySelector(".clear");
 const popup = document.getElementById("popup");
 const closePopupButton = document.getElementById("closePopup");
+const done = document.querySelector('.done');
 
 
 let todos = [];
@@ -52,11 +52,12 @@ addForm.addEventListener('submit', e => {
         }
     }
     else {
-        
+
     }
 
     addForm.reset();
 })
+    
 
 button.addEventListener("click", e => {
     addFavourites();
@@ -73,6 +74,10 @@ list.addEventListener('click', e => {
         else {
             unfavourite(e);
         }
+    }
+    if (e.target.classList.contains("pencil")) {
+        edit(e.target.parentElement);
+
     }
 })
 
@@ -93,3 +98,5 @@ closePopupButton.addEventListener("click", () => {
     popup.style.display = "none";
     list.style.display = "flex";
 });
+
+

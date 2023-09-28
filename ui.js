@@ -27,7 +27,7 @@ const favouriteTask = e => {
     }
 
 }
-unfavourite = (e) =>{
+unfavourite = (e) => {
     e.target.parentElement.classList.add('removed');
     setTimeout(function () {
         e.target.parentElement.classList.remove('removed');
@@ -49,6 +49,7 @@ addToList = (text) => {
     //function to add new todo to the list 
     html = `<li class="list-group-item d-flex  align-items-center">
     <span>${text}</span>
+    <i class="bi bi-pencil-square pencil"></i>
         <i class="bi bi-star yellow-color star"></i>
     <i class="far fa-trash-alt delete"></i>
 </li>`
@@ -95,6 +96,63 @@ addFavourites = () => {
     }
 
 }
+
+
+function removeItemsWithKey(key) {
+    for (let i = 0; i < localStorage.length; i++) {
+        const itemKey = localStorage.key(i);
+        if (itemKey.startsWith(key)) {
+            localStorage.removeItem(itemKey);
+        }
+    }
+}
+
+const edit = (element) => {
+    const oldData = element.textContent.trim(); // Get the old text content
+
+    const html = `
+        <form class="edit text-center my-4">
+            <input class="form-control m-auto" type="text" name="add" />
+        </form>`;
+
+    const listItem = element.closest('li'); 
+    // Find the parent li element
+
+    listItem.innerHTML = html; 
+    // Replace the content with the form
+
+    const editForm = listItem.querySelector('.edit');
+
+    editForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newTodo = editForm.add.value.trim();
+
+        if (newTodo) {
+            editForm.remove(); 
+            // Remove the form element
+
+            listItem.innerHTML = `<span>${newTodo}</span>
+                <i class="bi bi-pencil-square pencil"></i>
+                <i class="bi bi-star yellow-color star"></i>
+                <i class="far fa-trash-alt delete"></i>`;
+            // Update the content of the parent li element
+
+            let tasks = JSON.parse(localStorage.getItem("todos") || '[]');
+            tasks = tasks.map((task) => {
+                if (task.data.trim() === oldData) {
+                    task.data = newTodo;
+                }
+                return task;
+            });
+            localStorage.setItem('todos', JSON.stringify(tasks));
+             // Update the data in localStorage
+        }
+    });
+};
+
+
+
+
 if (localStorage.getItem("todos")) {
     //checks if todos key exists
     let stored = localStorage.getItem("todos");
@@ -106,4 +164,5 @@ if (localStorage.getItem("todos")) {
         });
     }
 }
+
 
