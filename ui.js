@@ -12,8 +12,19 @@ const removeTask = e => {
         });
         //creating an array of local storage filtering that array based on the task you choose to delete then overwriting local storage
         localStorage.setItem(`todos`, JSON.stringify(tasks));
+        updateCompletedTasks()
     }
 }
+const updateCompletedTasks = e => {
+    console.log(count)
+
+    count++;
+    html = `Completed tasks today : ${count}`;
+    noOfTasks.innerHTML = html;
+    localStorage.setItem('count', count);
+
+}
+
 const favouriteTask = e => {
     if (e.target.classList.contains("star")) {
         e.target.parentElement.classList.add('added');
@@ -115,10 +126,10 @@ const edit = (element) => {
             <input class="form-control m-auto" type="text" name="add" />
         </form>`;
 
-    const listItem = element.closest('li'); 
+    const listItem = element.closest('li');
     // Find the parent li element
 
-    listItem.innerHTML = html; 
+    listItem.innerHTML = html;
     // Replace the content with the form
 
     const editForm = listItem.querySelector('.edit');
@@ -128,7 +139,7 @@ const edit = (element) => {
         const newTodo = editForm.add.value.trim();
 
         if (newTodo) {
-            editForm.remove(); 
+            editForm.remove();
             // Remove the form element
 
             listItem.innerHTML = `<span>${newTodo}</span>
@@ -145,7 +156,7 @@ const edit = (element) => {
                 return task;
             });
             localStorage.setItem('todos', JSON.stringify(tasks));
-             // Update the data in localStorage
+            // Update the data in localStorage
         }
     });
 };
@@ -164,5 +175,36 @@ if (localStorage.getItem("todos")) {
         });
     }
 }
+
+if (localStorage.getItem("count")) {
+    // Get the current date
+    var currentDate = new Date();
+
+    // Format the date as YYYY-MM-DD (e.g., 2024-01-26)
+    var formattedDate = currentDate.toISOString().slice(0, 10);
+
+    // Check if there is a stored date in local storage
+    var storedDate = localStorage.getItem("resetDate");
+
+    // If there is no stored date or the stored date is not the current date, reset the variable
+    if (!storedDate || storedDate !== formattedDate) {
+        // Reset the variable to 0
+        count = 0
+        localStorage.setItem('count', count);
+
+        // Store the current date in local storage
+        localStorage.setItem("resetDate", formattedDate);
+    }
+
+        let stored = localStorage.getItem("count");
+        if (stored != 0) {
+            html = `Completed tasks today : ${stored}`;
+            noOfTasks.innerHTML = html;
+            localStorage.setItem('count', stored);
+            count = stored
+        }
+
+    }
+
 
 

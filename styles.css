@@ -6,6 +6,15 @@ body {
     max-width: 400px;
 }
 
+p{
+    color: white;
+
+}
+.completed{
+    color: white;
+    padding: 5%;
+}
+
 input[type=text],
 input[type=text]:focus {
     color: #fff;

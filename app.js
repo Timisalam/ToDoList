@@ -7,12 +7,12 @@ const clear = document.querySelector(".clear");
 const popup = document.getElementById("popup");
 const closePopupButton = document.getElementById("closePopup");
 const done = document.querySelector('.done');
-
-
+const noOfTasks = document.querySelector('.completed')
 let todos = [];
 let storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
 //check if local storage exists if it does not make it an empty array   
 let favourites = storedFavourites;
+let count  = 0;
 
 
 isDuplicate = (value, key) => {
