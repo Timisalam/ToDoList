@@ -4,7 +4,7 @@ const removeTask = e => {
         e.target.parentElement.classList.add('complete');
         setTimeout(function () {
             e.target.parentElement.remove();
-        }, 1000);
+        }, 500);
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
         tasks = tasks.filter((task) => {
@@ -203,7 +203,6 @@ if (localStorage.getItem("count")) {
             localStorage.setItem('count', stored);
             count = stored
         }
-
     }
 
 
