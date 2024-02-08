@@ -5,6 +5,8 @@ const removeTask = e => {
         setTimeout(function () {
             e.target.parentElement.remove();
         }, 500);
+        completedTasks.push(e.target.parentElement.textContent)
+        localStorage.setItem('completed', JSON.stringify(completedTasks))
         let tasks = localStorage.getItem("todos");
         tasks = JSON.parse(tasks);
         tasks = tasks.filter((task) => {
@@ -15,8 +17,8 @@ const removeTask = e => {
         updateCompletedTasks()
     }
 }
+
 const updateCompletedTasks = e => {
-    console.log(count)
 
     count++;
     html = `Completed tasks today : ${count}`;
@@ -191,19 +193,30 @@ if (localStorage.getItem("count")) {
         // Reset the variable to 0
         count = 0
         localStorage.setItem('count', count);
+        completedTasks = [];
+        localStorage.setItem('completed',completedTasks)
 
         // Store the current date in local storage
         localStorage.setItem("resetDate", formattedDate);
     }
 
-        let stored = localStorage.getItem("count");
-        if (stored != 0) {
-            html = `Completed tasks today : ${stored}`;
-            noOfTasks.innerHTML = html;
-            localStorage.setItem('count', stored);
-            count = stored
-        }
+    let stored = localStorage.getItem("count");
+    if (stored != 0) {
+        html = `Completed tasks today : ${stored}`;
+        noOfTasks.innerHTML = html;
+        localStorage.setItem('count', stored);
+        count = stored
     }
+}
 
+if (localStorage.getItem("completed")) {
+    //checks if todos key exists
+    let stored = localStorage.getItem("completed");
+    stored = JSON.parse(stored);
+    if (Array.isArray(stored)) {
+        //checks if array is not empty
+        completedTasks = stored
 
-
+    }
+}
+console.log(completedTasks)

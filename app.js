@@ -8,11 +8,14 @@ const popup = document.getElementById("popup");
 const closePopupButton = document.getElementById("closePopup");
 const done = document.querySelector('.done');
 const noOfTasks = document.querySelector('.completed')
+const completed = document.querySelector('.completed-tasks')
+const completedTasksList = document.querySelector('.tasksCompleted')
 let todos = [];
+let completedTasks = [];
 let storedFavourites = JSON.parse(localStorage.getItem('favourites')) || [];
 //check if local storage exists if it does not make it an empty array   
 let favourites = storedFavourites;
-let count  = 0;
+let count = 0;
 
 
 isDuplicate = (value, key) => {
@@ -57,7 +60,7 @@ addForm.addEventListener('submit', e => {
 
     addForm.reset();
 })
-    
+
 
 button.addEventListener("click", e => {
     addFavourites();
@@ -97,6 +100,13 @@ popup.addEventListener("click", e => {
 closePopupButton.addEventListener("click", () => {
     popup.style.display = "none";
     list.style.display = "flex";
+});
+
+
+completed.addEventListener('click', () => {
+    // Open a new tab with tasks.html and pass the completed tasks array as a query parameter
+    const completedTasksUrl = `tasks.html?completedTasks=${JSON.stringify(completedTasks)}`;
+    window.open(completedTasksUrl, '_blank');
 });
 
 

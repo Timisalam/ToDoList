@@ -1,6 +1,10 @@
 body {
     background: #352f5b;
 }
+a:link{
+    text-decoration: none;
+    color: black;
+}
 
 .container {
     max-width: 400px;
@@ -94,4 +98,10 @@ input[type=text]:focus {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+}
+.completed-tasks{
+    background-color: green;
+}
+.done{
+    background-color: green;
 }
