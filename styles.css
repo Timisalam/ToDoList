@@ -104,4 +104,5 @@ input[type=text]:focus {
 }
 .done{
     background-color: green;
+    text-decoration: none;
 }
